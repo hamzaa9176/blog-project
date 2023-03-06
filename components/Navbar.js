@@ -35,7 +35,7 @@ const Navbar = () => {
         {
           categories.map((category)=>(
         <li key={category.slug}>
-          <Link href={`/category/${category.slug}`} className="block py-2 pl-3 pr-4 font-bold text-gray-800 transition-colors duration-75 ease-in dark:text-white hover:text-white rounded md:bg-transparent md:text-gray-800 md:p-0 md:dark:text-gray-800 md:dark:bg-transparent" aria-current={category.slug}>{category.name.charAt(0).toUpperCase()+category.name.slice(1)}</Link>
+          <Link href={`/category/${category.slug}`} onClick={()=>{setVal('hidden')}} className="block py-2 pl-3 pr-4 font-bold text-gray-800 transition-colors duration-75 ease-in dark:text-white hover:text-white rounded md:bg-transparent md:text-gray-800 md:p-0 md:dark:text-gray-800 md:dark:bg-transparent" aria-current={category.slug}>{category.name.charAt(0).toUpperCase()+category.name.slice(1)}</Link>
         </li>
           ))
         }
