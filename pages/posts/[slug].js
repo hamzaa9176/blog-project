@@ -68,7 +68,7 @@ const Slug = ({ post }) => {
 
   return (
     
-    <article className="max-w-2xl px-6 py-24 mx-auto space-y-12 dark:dark:bg-gray-800 dark:dark:text-gray-50">
+    <article className="max-w-2xl px-6 py-24 mx-auto space-y-12 dark:dark:bg-gray-800 dark:dark:text-white">
       <Head>
         <title key="title">{`${post.title} - Blogging a blogging site`}</title>
         <meta name="description" content={post.slug} />
@@ -102,7 +102,7 @@ const Slug = ({ post }) => {
           </div>
         
 	</div>
-	<div className="font-raleway dark:dark:text-gray-100" dangerouslySetInnerHTML={{ __html: post.content.html }} />
+	<div className="font-raleway dark:dark:text-white" dangerouslySetInnerHTML={{ __html: post.content.html }} />
   
 	<div className="pt-12 border-t dark:dark:border-gray-700">
 		<div className="flex flex-col space-y-4 md:space-y-0 md:space-x-6 md:flex-row">
