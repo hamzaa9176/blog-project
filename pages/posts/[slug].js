@@ -76,7 +76,7 @@ const Slug = ({ post }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 	<div className="w-full mx-auto space-y-4 text-center">
-		<p className="text-xs font-semibold tracking-wider">Category: <span className='text-violet-400 italic uppercase'>
+		<p className="text-xs font-semibold text-white tracking-wider">Category: <span className='text-violet-400 italic uppercase'>
       {
         post.categories.map((c, index)=>(
           <Link href={`/category/${c.slug}`} key={c.slug}>{(index ? ', ': '') + c.name}</Link>
@@ -84,13 +84,13 @@ const Slug = ({ post }) => {
       }
       
       </span></p>
-		<h1 className="text-4xl font-bold leading-tight md:text-5xl">{post.title} </h1>
+		<h1 className="text-4xl font-bold leading-tight text-white md:text-5xl">{post.title} </h1>
     
           <div className="flex justify-center items-center mb-8">
-            <div className="hidden md:flex  justify-center lg:mb-0 lg:w-auto mr-8 items-center">
+            <div className=" md:flex  justify-center lg:mb-0 lg:w-auto mr-8 items-center">
               <img src={post.author.avatar.url} height="30px"
                 width="30px"
-                className="align-middle rounded-full" alt={post.author.name} />
+                className="hidden align-middle rounded-full md:block" alt={post.author.name} />
               <p className="inline align-middle text-white ml-2 font-medium text-lg">By <span className='dark:text-violet-400'>{post.author.name}</span> </p>
             </div>
             <div className="font-medium text-white">
@@ -102,14 +102,14 @@ const Slug = ({ post }) => {
           </div>
         
 	</div>
-	<div className="font-raleway dark:dark:text-white" dangerouslySetInnerHTML={{ __html: post.content.html }} />
+	<div className="font-raleway text-white dark:text-white" dangerouslySetInnerHTML={{ __html: post.content.html }} />
   
-	<div className="pt-12 border-t dark:dark:border-gray-700">
+	<div className="pt-12 border-t border-gray-700">
 		<div className="flex flex-col space-y-4 md:space-y-0 md:space-x-6 md:flex-row">
-			<img src={post.author.avatar.url} alt="" className="self-center flex-shrink-0 w-24 h-24 border rounded-full md:justify-self-start dark:dark:bg-gray-500 dark:dark:border-gray-700"/>
+			<img src={post.author.avatar.url} alt="" className="self-center flex-shrink-0 w-24 h-24 border rounded-full md:justify-self-start bg-gray-500 border-gray-700"/>
 			<div className="flex flex-col">
-				<h4 className="text-lg font-semibold">{post.author.name}</h4>
-				<p className="dark:dark:text-gray-400">{post.author.bio}</p>
+				<h4 className="text-lg font-semibold text-violet-400">{post.author.name}</h4>
+				<p className="text-white">{post.author.bio}</p>
 			</div>
 		</div>
 		<div className="flex justify-center pt-4 space-x-4 align-center">

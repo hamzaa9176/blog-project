@@ -31,11 +31,11 @@ const Navbar = () => {
       <HiOutlineMenuAlt3 className='text-white w-10 h-10'/>
     </button>
     <div className={` w-full ${val} md:block md:w-auto ` } id="navbar-solid-bg">
-      <ul className="flex flex-col mt-4 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-transparent dark:bg-gray-800 md:dark:bg-transparent dark:border-gray-700">
+      <ul className="flex flex-col mt-4 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-transparent dark:bg-gray-800 md:dark:bg-transparent dark:border-gray-700">
         {
           categories.map((category)=>(
         <li key={category.slug}>
-          <Link href={`/category/${category.slug}`} className="block py-2 pl-3 pr-4 font-bold text-gray-800 transition-colors duration-75 ease-in hover:text-white rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-gray-800 md:dark:bg-transparent" aria-current={category.slug}>{category.name.charAt(0).toUpperCase()+category.name.slice(1)}</Link>
+          <Link href={`/category/${category.slug}`} className="block py-2 pl-3 pr-4 font-bold text-gray-800 transition-colors duration-75 ease-in dark:text-white hover:text-white rounded md:bg-transparent md:text-gray-800 md:p-0 md:dark:text-gray-800 md:dark:bg-transparent" aria-current={category.slug}>{category.name.charAt(0).toUpperCase()+category.name.slice(1)}</Link>
         </li>
           ))
         }
