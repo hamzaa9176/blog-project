@@ -2,6 +2,7 @@ import {useState, useEffect} from 'react'
 import Link from 'next/link'
 import {getCategories} from '../services'
 import {HiOutlineMenuAlt3} from 'react-icons/hi'
+import {MdOutlineDeveloperMode} from 'react-icons/md'
 
 const Navbar = () => {
   
@@ -16,9 +17,9 @@ const Navbar = () => {
            
 <nav className="p-3 border-gray-200 rounded bg-violet-400 dark:bg-violet-400 dark:border-gray-700">
   <div className="container flex flex-wrap items-center justify-between mx-auto">
-    <Link href={'/'} className="flex items-center">
-        <img src="https://flowbite.com/docs/images/logo.svg" className="h-6 mr-3 sm:h-10" alt="Bloggy Logo" />
-        <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Bloggy</span>
+    <Link href={'/'} className="flex items-center hover:text-white transition-all duration-100 ease-linear">
+        <div className=" text-3xl mr-3 sm:h-10 "><MdOutlineDeveloperMode/></div>
+        <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">dev book</span>
     </Link>
     <button onClick={()=>{
       if(val==='hidden'){
@@ -35,7 +36,7 @@ const Navbar = () => {
         {
           categories.map((category)=>(
         <li key={category.slug}>
-          <Link href={`/category/${category.slug}`} onClick={()=>{setVal('hidden')}} className="block py-2 pl-3 pr-4 font-bold text-gray-800 transition-colors duration-75 ease-in dark:text-white hover:text-white rounded md:bg-transparent md:text-gray-800 md:p-0 md:dark:text-gray-800 md:dark:bg-transparent" aria-current={category.slug}>{category.name.charAt(0).toUpperCase()+category.name.slice(1)}</Link>
+          <Link href={`/category/${category.slug}`} onClick={()=>{setVal('hidden')}} className="block py-2 pl-3 pr-4 font-bold text-gray-800 transition-colors duration-75 ease-in dark:text-white hover:text-white rounded md:bg-transparent md:text-gray-800 md:p-0 md:dark:text-gray-800 md:dark:bg-transparent" aria-current={category.slug}>{category.name}</Link>
         </li>
           ))
         }

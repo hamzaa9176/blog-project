@@ -76,7 +76,7 @@ const Slug = ({ post }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 	<div className="w-full mx-auto space-y-4 text-center">
-		<p className="text-xs font-semibold text-white tracking-wider">Category: <span className='text-violet-400 italic uppercase'>
+		<p className="text-md font-semibold text-white tracking-wider">{post.categories.length>1?'categories: ' : 'category:'} <span className='text-violet-400 lowercase'>
       {
         post.categories.map((c, index)=>(
           <Link href={`/category/${c.slug}`} key={c.slug}>{(index ? ', ': '') + c.name}</Link>
@@ -91,10 +91,10 @@ const Slug = ({ post }) => {
               <img src={post.author.avatar.url} height="30px"
                 width="30px"
                 className="hidden align-middle rounded-full md:block" alt={post.author.name} />
-              <p className="inline align-middle text-white ml-2 font-medium text-lg">By <span className='dark:text-violet-400'>{post.author.name}</span> </p>
+              <p className="inline align-middle text-white ml-2 font-medium text-lg">by <span className='text-violet-400'>{post.author.name}</span> </p>
             </div>
             <div className="font-medium text-white">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 inline mr-2 text-pink-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 inline mr-2 text-violet-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
               <span className="align-middle">{moment(post.createdAt).format('MMM DD, YYYY')}</span>
@@ -108,7 +108,7 @@ const Slug = ({ post }) => {
 		<div className="flex flex-col space-y-4 md:space-y-0 md:space-x-6 md:flex-row">
 			<img src={post.author.avatar.url} alt="" className="self-center flex-shrink-0 w-24 h-24 border rounded-full md:justify-self-start bg-gray-500 border-gray-700"/>
 			<div className="flex flex-col">
-				<h4 className="text-lg font-semibold text-violet-400">{post.author.name}</h4>
+				<h4 className="text-lg font-bold text-violet-400">{post.author.name}</h4>
 				<p className="text-white">{post.author.bio}</p>
 			</div>
 		</div>

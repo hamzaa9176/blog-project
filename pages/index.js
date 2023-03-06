@@ -56,7 +56,7 @@ export default function Home({ posts }) {
     <div className="container w-4/5 m-auto">
 
       <Head>
-        <title>Blogging - a blogging site</title>
+        <title>dev book - developer book by a learning dev</title>
         <meta name="description" content="Bloggy - a blogging site" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
