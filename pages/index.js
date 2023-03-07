@@ -1,7 +1,5 @@
 import Head from 'next/head'
 import { GraphQLClient, gql } from 'graphql-request'
-import { Inter } from 'next/font/google'
-import styles from "../styles/Home.module.css";
 import BlogCard from '../components/BlogCard'
 
 
@@ -10,10 +8,9 @@ import BlogCard from '../components/BlogCard'
 const graphcms = new GraphQLClient('https://api-eu-central-1-shared-euc1-02.hygraph.com/v2/clerb27ka1dzz01ukhe6p5p08/master');
 const QUERY = gql`
 {
-  posts(orderBy: publishedAt_DESC) {
+  posts(orderBy: createdAt_DESC) {
     id,
-    title, 
-    datePublished,
+    title,
     createdAt
     slug,
     content{
@@ -65,7 +62,6 @@ export default function Home({ posts }) {
         <div className="container p-6 mx-auto space-y-8">
         <div className="space-y-2 text-center">
             <h2 className="text-3xl text-white font-bold">Checkout<span className="text-violet-400"> My Posts</span></h2>
-            <p className="font-serif text-sm dark:text-gray-400">-----</p>
           </div>
           <div className="grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-2 lg:grid-cols-4">
 

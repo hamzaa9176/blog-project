@@ -11,6 +11,7 @@ const Navbar = () => {
     getCategories().then((newCategories) => {
       setCategories(newCategories);
     });  }, [])
+    
   const [val, setVal] = useState('hidden')
     return (
         <>

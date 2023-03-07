@@ -91,7 +91,7 @@ const Slug = ({ post }) => {
               <img src={post.author.avatar.url} height="30px"
                 width="30px"
                 className="hidden align-middle rounded-full md:block" alt={post.author.name} />
-              <p className="inline align-middle text-white ml-2 font-medium text-lg">by <span className='text-violet-400'>{post.author.name}</span> </p>
+              <p className="inline align-middle text-white ml-2 font-medium text-lg">by <span className='text-violet-400'><Link href={`/author/${post.author.name}`}>{post.author.name}</Link></span> </p>
             </div>
             <div className="font-medium text-white">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 inline mr-2 text-violet-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">

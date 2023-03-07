@@ -1,53 +1,8 @@
-import React from "react";
-import { GraphQLClient, gql } from "graphql-request";
 import BlogCard from "../../components/BlogCard";
 import Head from "next/head";
+import {getCategories, GetCategoryPost} from '../../services'
 
-const graphcms = new GraphQLClient(
-  "https://api-eu-central-1-shared-euc1-02.hygraph.com/v2/clerb27ka1dzz01ukhe6p5p08/master"
-);
-const QUERY = gql`
-  query GetCategoryPost($slug: String!) {
-    postsConnection(where: { categories_some: { slug: $slug } }) {
-      edges {
-        cursor
-        node {
-          author {
-            id
-            name
-            bio
-            avatar {
-              url
-            }
-          }
-          createdAt
-          slug
-          title
-          coverPhoto {
-            url
-          }
-          datePublished
-          content {
-            html
-          }
 
-          categories {
-            name
-            slug
-          }
-        }
-      }
-    }
-  }
-`;
-const CATEGORYLIST = gql`
-  query GetGategories {
-    categories {
-      name
-      slug
-    }
-  }
-`;
 
 const Category = ({ posts, slug }) => {
   return (
@@ -62,7 +17,6 @@ const Category = ({ posts, slug }) => {
         <div className="container p-6 mx-auto space-y-8">
           <div className="space-y-2 text-center">
             <h2 className="text-3xl font-bold text-white">category: <span className="text-violet-400">{slug.toLowerCase()}</span></h2>
-            <p className="font-serif text-sm dark:text-gray-400">-----</p>
           </div>
           <div className="grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-2 lg:grid-cols-4">
             {posts.map((post) => (
@@ -71,7 +25,7 @@ const Category = ({ posts, slug }) => {
                 author={post.node.author}
                 coverPhoto={post.node.coverPhoto}
                 key={post.node.slug}
-                datePublished={post.node.datePublished}
+                datePublished={post.node.createdAt}
                 slug={post.node.slug}
               />
             ))}
@@ -85,7 +39,7 @@ const Category = ({ posts, slug }) => {
 export default Category;
 
 export async function getStaticPaths() {
-  const { categories } = await graphcms.request(CATEGORYLIST);
+  const categories  = await getCategories();
   return {
     paths: categories.map((c) => ({ params: { slug: c.slug } })),
     fallback: false,
@@ -94,7 +48,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const slug = params.slug;
-  const data = await graphcms.request(QUERY, { slug });
+  const data = await GetCategoryPost(slug);
   const posts = data.postsConnection.edges;
   return {
     props: {
