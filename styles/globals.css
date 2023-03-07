@@ -14,42 +14,4 @@ body {
   background-color: #1f2937; 
 }
 
-button {
-  color: red;
-}
 
-h1 {
-  font-size: 1.5rem;
-}
-
-h2 {
-  font-size: 1.2rem;
-}
-
-h3 {
-  font-size: 1.2rem;
-  font-weight: 500;
-  padding: 1rem 0rem;
-  font-weight: bold;
-}
-
-h6 {
-  font-size: 1rem;
-}
-
-p,
-li {
-  line-height: 1.5rem;
-  padding: 1rem 0rem;
-  font-size: 1.1rem;
-}
-
-
-
-
-@media screen and (max-width: 768px) {
-  body {
-    margin: 0% 0%;
-  }
-
-}
