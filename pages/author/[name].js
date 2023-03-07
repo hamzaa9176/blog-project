@@ -32,7 +32,7 @@ const authorPage = ({ result, authorPosts }) => {
           </h1>
         </div>
         <div className="mt-12 flex flex-col justify-center border-b border-violet-400">
-          <p className="text-white text-center font-light lg:px-16">{result.authors.map((author) => (author.bio))}</p>
+          <p className="text-white text-center text-md font-light lg:px-16">{result.authors.map((author) => (author.bio))}</p>
         </div>
 
 
