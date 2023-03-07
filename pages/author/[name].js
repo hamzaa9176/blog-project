@@ -9,7 +9,7 @@ const authorPage = ({ result, authorPosts }) => {
   const authorName = result.authors.map((author) => (author.name));
 
   return (
-    <div className="p-16">
+    <div className="md:p-20">
       <Head>
         <title key="title">{`${authorName} - Blogging a blogging site`}</title>
         <meta name="description" content={authorName+" posts, bio, contact"} />
