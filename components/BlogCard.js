@@ -5,7 +5,7 @@ import Link from "next/link";
 const BlogCard = ({ title, author, datePublished, slug, coverPhoto }) => {
   return (
 
-    <article className="flex flex-col bg-gray-900 rounded-lg">
+    <article className="flex flex-col bg-gray-900 transition-all duration-100 ease-linear rounded-lg hover:scale-95">
       <Link href={`/posts/${slug}`}>
         <img alt="" className="object-cover w-full h-52 bg-gray-500 rounded-t-lg" src={coverPhoto.url} />
       </Link>
