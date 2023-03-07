@@ -1,66 +1,7 @@
-import { GraphQLClient, gql } from 'graphql-request'
 import moment from 'moment';
 import Link from 'next/link';
 import Head from 'next/head';
-const graphcms = new GraphQLClient('https://api-eu-central-1-shared-euc1-02.hygraph.com/v2/clerb27ka1dzz01ukhe6p5p08/master');
-const QUERY = gql`
-  query Post($slug: String!) {
-    post(where: { slug: $slug }) {
-      categories {
-        id,
-        name,
-        slug
-      },
-      id
-      title
-      slug
-      datePublished
-      author {
-        id
-        name
-        bio
-        avatar {
-          url
-        }
-      }
-      content {
-        html
-      }
-      coverPhoto {
-        id
-        url
-      }
-    }
-  }
-`;
-const SLUGLIST = gql`
-  {
-    posts {
-      slug
-    }
-  }
-`;
-
-export async function getStaticPaths() {
-  const { posts } = await graphcms.request(SLUGLIST);
-  return {
-    paths: posts.map((post) => ({ params: { slug: post.slug } })),
-    fallback: false
-  }
-}
-
-export async function getStaticProps({ params }) {
-  const slug = params.slug;
-  const data = await graphcms.request(QUERY, { slug });
-  const post = data.post;
-  return {
-    props: {
-      post,
-    },
-    revalidate: 10,
-  };
-}
-
+import {getAllSlugs, getPostDetail} from '../../services'
 
 
 
@@ -141,3 +82,24 @@ const Slug = ({ post }) => {
 }
 
 export default Slug
+
+
+export async function getStaticPaths() {
+  const { posts } = await getAllSlugs();
+  return {
+    paths: posts.map((post) => ({ params: { slug: post.slug } })),
+    fallback: false
+  }
+}
+
+export async function getStaticProps({ params }) {
+  const slug = params.slug;
+  const data = await getPostDetail(slug);
+  const post = data.post;
+  return {
+    props: {
+      post,
+    },
+    revalidate: 10,
+  };
+}

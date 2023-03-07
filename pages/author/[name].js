@@ -1,4 +1,4 @@
-import BlogCard from "../../components/BlogCard";
+import {BlogCard} from "../../components";
 import { getAuthors, getAuthorPost } from "../../services";
 import Head from "next/head";
 

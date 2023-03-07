@@ -1,7 +1,6 @@
-import { GraphQLClient, gql } from 'graphql-request'
+import { request, gql } from 'graphql-request';
 
-
-const graphcms = new GraphQLClient('https://api-eu-central-1-shared-euc1-02.hygraph.com/v2/clerb27ka1dzz01ukhe6p5p08/master');
+const graphqlAPI = process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT;
 
 
 export async function getCategories() {
@@ -13,7 +12,7 @@ export async function getCategories() {
     }
   }
 `;
-  const result = await graphcms.request(CATEGORYLIST);
+  const result = await request(graphqlAPI,CATEGORYLIST);
   return result.categories;
 }
 
@@ -53,7 +52,7 @@ export async function GetCategoryPost(slug){
     }
   }
 `;
-const result = await graphcms.request(QUERY, {slug});
+const result = await request(graphqlAPI,QUERY, {slug});
 return result;
 }
 
@@ -69,7 +68,7 @@ export async function getAuthors() {
     }
   }
   `;
-  const result = await graphcms.request(authorsList);
+  const result = await request(graphqlAPI, authorsList);
   return result.authors;
 }
 
@@ -107,6 +106,94 @@ export async function getAuthorPost(name) {
   
 `;
 
-  const result = await graphcms.request(QUERY, {name});
+  const result = await request(graphqlAPI, QUERY, {name});
   return result;
+}
+
+
+export async function getPosts(){
+  const QUERY = gql`
+{
+  posts(orderBy: createdAt_DESC) {
+    id,
+    title,
+    createdAt
+    slug,
+    content{
+      html
+    }
+    author{
+      name, 
+      avatar{
+        url
+      }
+    }
+    categories {
+      name
+      slug
+    }
+    coverPhoto{
+      createdBy {
+        id
+      },
+      
+      url
+    }
+  }
+}
+`;
+
+const result = await request(graphqlAPI, QUERY);
+return result;
+
+}
+
+//used in posts/[slug].js
+export async function getAllSlugs(){
+  const SLUGLIST = gql`
+  {
+    posts {
+      slug
+    }
+  }
+`;
+const result = await request(graphqlAPI, SLUGLIST);
+return result;
+}
+
+
+export async function getPostDetail(slug){
+  const QUERY = gql`
+  query Post($slug: String!) {
+    post(where: { slug: $slug }) {
+      categories {
+        id,
+        name,
+        slug
+      },
+      id
+      title
+      slug
+      datePublished
+      author {
+        id
+        name
+        bio
+        avatar {
+          url
+        }
+      }
+      content {
+        html
+      }
+      coverPhoto {
+        id
+        url
+      }
+    }
+  }
+`;
+const data = await request(graphqlAPI, QUERY, { slug });
+
+return data;
 }

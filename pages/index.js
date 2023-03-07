@@ -1,45 +1,11 @@
 import Head from 'next/head'
-import { GraphQLClient, gql } from 'graphql-request'
-import BlogCard from '../components/BlogCard'
+import {BlogCard} from '../components'
+import {getPosts} from '../services'
 
 
-
-
-const graphcms = new GraphQLClient('https://api-eu-central-1-shared-euc1-02.hygraph.com/v2/clerb27ka1dzz01ukhe6p5p08/master');
-const QUERY = gql`
-{
-  posts(orderBy: createdAt_DESC) {
-    id,
-    title,
-    createdAt
-    slug,
-    content{
-      html
-    }
-    author{
-      name, 
-      avatar{
-        url
-      }
-    }
-    categories {
-      name
-      slug
-    }
-    coverPhoto{
-      createdBy {
-        id
-      },
-      
-      url
-    }
-  }
-}
-`;
 
 export async function getStaticProps() {
-  const { posts } = await graphcms.request(QUERY);
-
+  const { posts } = await getPosts();
   return {
     props: {
       posts,
@@ -51,7 +17,6 @@ export async function getStaticProps() {
 export default function Home({ posts }) {
   return (
     <div className="container w-4/5 m-auto">
-
       <Head>
         <title>dev book - developer book by a learning dev</title>
         <meta name="description" content="Bloggy - a blogging site" />
