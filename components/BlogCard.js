@@ -5,9 +5,9 @@ import Link from "next/link";
 const BlogCard = ({ title, author, datePublished, slug, coverPhoto }) => {
   return (
 
-    <article className="flex flex-col bg-gray-900">
+    <article className="flex flex-col bg-gray-900 rounded-lg">
       <Link href={`/posts/${slug}`}>
-        <img alt="" className="object-cover w-full h-52 bg-gray-500" src={coverPhoto.url} />
+        <img alt="" className="object-cover w-full h-52 bg-gray-500 rounded-t-lg" src={coverPhoto.url} />
       </Link>
       <div className="flex flex-col flex-1 p-6">
         <Link href={`/author/${author.name}`} className="text-xs tracking-wider uppercase hover:underline text-violet-400">{author.name}</Link>
