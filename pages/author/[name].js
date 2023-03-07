@@ -31,8 +31,11 @@ const authorPage = ({ result, authorPosts }) => {
           <h1 className="text-4xl font-medium text-white">{result.authors.map((author) => (author.name))}
           </h1>
         </div>
-        <div className="mt-12 flex flex-col justify-center border-b border-violet-400">
+        <div className="w-full md:w-2/4 items-center m-auto mt-12 flex flex-col justify-center ">
           <p className="text-white text-center text-md font-light lg:px-16">{result.authors.map((author) => (author.bio))}</p>
+        </div>
+        <div className=" w-1/5 m-auto border-b border-violet-400">
+
         </div>
 
 
