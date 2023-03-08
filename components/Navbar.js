@@ -11,9 +11,24 @@ const Navbar = () => {
     getCategories().then((newCategories) => {
       setCategories(newCategories);
     });  }, [])
-    
+
+//hiding responsive nav when resizing windows because i using val to hide or display nav on mobile screen so i have to use this way of hidding nav.
+    useEffect(() => {
+      const handleWindowResize = () => {
+        setVal('hidden')
+      };
+  
+      window.addEventListener('resize', handleWindowResize);
+  
+      return () => {
+        window.removeEventListener('resize', handleWindowResize);
+      };
+    });
+
+
   const [val, setVal] = useState('hidden')
-    return (
+
+  return (
         <>
            
 <nav className="p-3 border-gray-200 bg-violet-400 dark:bg-violet-400 dark:border-gray-700">
@@ -24,11 +39,13 @@ const Navbar = () => {
     </Link>
     <button   onClick={()=>{
       if(val==='hidden'){
-        setVal('block bg-violet-400 px-3 pb-3 absolute top-14 left-0 right-0 z-50')
+        setVal('block bg-violet-400 px-3 text-center pb-3 absolute top-14 left-0 right-0 z-50')
+        
       }else {
         setVal('hidden')
+       
       }
-    }} data-collapse-toggle="navbar-solid-bg" type="button" className=" inline-flex  items-center p-2 ml-3 text-sm transition-all duration-75 ease-in-out text-violet-800 rounded-lg border-2 md:hidden hover:bg-gray-800 hover:border-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-800" aria-controls="navbar-solid-bg" aria-expanded="false">
+    }} data-collapse-toggle="navbar-solid-bg" type="button" className="  inline-flex  items-center p-2 ml-3 text-sm transition-all duration-75 ease-in-out text-violet-800 rounded-lg border-2 md:hidden hover:bg-gray-800 hover:border-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-800" aria-controls="navbar-solid-bg" aria-expanded="false">
       <span className="sr-only ">Open main menu</span>
       <HiOutlineMenuAlt3 className='text-white w-5 h-5 '/>
     </button>
@@ -37,7 +54,7 @@ const Navbar = () => {
         {
           categories.map((category)=>(
         <li key={category.slug}>
-          <Link href={`/category/${category.slug}`} onClick={()=>{setVal('hidden')}} className="block py-2 pl-3 pr-4 font-bold text-gray-800 transition-colors duration-75 ease-in dark:text-white hover:text-white rounded md:bg-transparent md:text-gray-800 md:p-0 md:dark:text-gray-800 md:dark:bg-transparent" aria-current={category.slug}>{category.name}</Link>
+          <Link href={`/category/${category.slug}`} onClick={()=>{setVal('hidden')}} className=" block py-2 pl-3 pr-4 font-bold text-gray-800 transition-colors duration-75 ease-in dark:text-white hover:text-white rounded md:bg-transparent md:text-gray-800 md:p-0 md:dark:text-gray-800 md:dark:bg-transparent" aria-current={category.slug}>{category.name}</Link>
         </li>
           ))
         }
