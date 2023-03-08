@@ -16,14 +16,14 @@ export async function getStaticProps() {
 
 export default function Home({ posts }) {
   return (
-    <div className="container w-4/5 m-auto">
+    <div className="container mb-auto w-4/5 m-auto">
       <Head>
         <title>dev book - developer book by a learning dev</title>
         <meta name="description" content="Bloggy - a blogging site" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <section className="py-6 sm:py-12 dark:dark:bg-gray-800 dark:dark:text-gray-100">
+      <section className="py-6 mb-auto sm:py-12 dark:dark:bg-gray-800 dark:dark:text-gray-100">
         <div className="container p-6 mx-auto space-y-8">
         <div className="space-y-2 text-center">
             <h2 className="text-3xl text-white font-bold">Checkout<span className="text-violet-400"> My Posts</span></h2>
