@@ -58,7 +58,7 @@ export default function Home({ fallback }) {
   }
 }`, next], 
 ([end, query])=>  request(end, query, {next}),
-{fallbackData:fallback, revalidateIfStale:true}
+{fallbackData:fallback.posts, revalidateOnFocus:true}
   );
 
 
