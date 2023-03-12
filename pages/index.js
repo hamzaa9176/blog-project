@@ -25,7 +25,7 @@ export default function Home({ fallback }) {
 
   const { data } = useSWR([graphqlAPI,
 `query MyQuery($next: Int) {
-  postsConnection(first: 2, skip: $next, orderBy: createdAt_DESC) {
+  postsConnection(first: 4, skip: $next, orderBy: createdAt_DESC) {
     edges {
       node {
         author {
@@ -89,11 +89,12 @@ export default function Home({ fallback }) {
               ))
             }
           </div>
+          <button disabled={!data?.postsConnection?.pageInfo.hasPreviousPage} onClick={() => setNext(next - 4)} class="text-white disabled:bg-red-400 disabled:text-gray-800 bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Prev</button>
+        <button disabled={!data?.postsConnection?.pageInfo.hasNextPage} onClick={() => setNext(next + 4)}  class="text-white disabled:bg-gray-400 disabled:text-gray-800 bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" >Next</button>
+  
         </div>
-        <button disabled={!data?.postsConnection?.pageInfo.hasPreviousPage} onClick={() => setNext(next - 2)} className="bg-indigo-700 w-20 text-white px-3 py-1 rounded-md disabled:bg-gray-400 disabled:text-gray-800">Prev</button>
-        <button disabled={!data?.postsConnection?.pageInfo.hasNextPage} onClick={() => setNext(next + 2)}  className="bg-indigo-700 w-20 text-white px-3 py-1 rounded-md disabled:bg-gray-400 disabled:text-gray-800">Next</button>
           
-        {/* <div>Pages: {posts.postsConnection.pageInfo.pageSize}</div> */}
+       
       </section>
     </div>
   )

@@ -1,5 +1,4 @@
 import { request, gql } from 'graphql-request';
-import useSWR, { SWRConfig } from "swr";
 
 const fetcher = (enpoint, query, variable) => request(enpoint, query, variable);
 const graphqlAPI = process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT;
@@ -116,7 +115,7 @@ export async function getAuthorPost(name) {
 export async function getPosts(){
   const QUERY = gql`
   query MyQuery() {
-    postsConnection(first: 2, skip: 0, orderBy: createdAt_DESC) {
+    postsConnection(first: 4, skip: 0, orderBy: createdAt_DESC) {
       edges {
         node {
           author {
