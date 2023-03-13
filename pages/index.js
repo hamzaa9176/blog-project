@@ -135,7 +135,7 @@ export default function Home({ fallback }) {
           </div>
           <div className="grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-2 lg:grid-cols-4">
             {
-              data.postsConnection?.edges.map((post) => (
+              data?.postsConnection?.edges.map((post) => (
                 <BlogCard
                   title={post.node.title}
                   author={post.node.author}

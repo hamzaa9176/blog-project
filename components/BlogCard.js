@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from 'next/image';
 
 const BlogCard = ({ title, author, datePublished, slug, coverPhoto }) => {
+  
   return (
 
     <article className="flex flex-col bg-secondary shadow-lg p-3 transition-all duration-100 ease-linear rounded-2xl hover:shadow-2xl ">
@@ -15,7 +16,7 @@ const BlogCard = ({ title, author, datePublished, slug, coverPhoto }) => {
 
           <div className='flex flex-row justify-left w-full mt-5'>
             
-              <Image src={author.avatar.url} alt={author.name} width={10} height={10} className=" rounded-full w-10 h-10 object-cover" />
+              <Image src={author.avatar?.url} alt={author.name} width={10} height={10} className=" rounded-full w-10 h-10 object-cover" />
               <div className='flex flex-col ml-5'>
               <Link href={`/author/${author.name}`} className="text-md font-semibold lowercase hover:underline text-accent">{author.name}</Link>
             <span className='text-xs text-typing'>{moment(datePublished).format('MMMM Do YYYY')}</span>
