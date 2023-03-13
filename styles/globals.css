@@ -9,9 +9,18 @@
   margin: 0;
   box-sizing: border-box;
 }
-
 body {
-  background-color: #1f2937; 
+  background: radial-gradient(circle, #D2D6DB 10%, transparent 11%),radial-gradient(circle at bottom left, #D2D6DB 1%, transparent 6%),radial-gradient(circle at bottom right, #D2D6DB 5%, transparent 6%),radial-gradient(circle at top left, #D2D6DB 5%, transparent 6%),radial-gradient(circle at top right, #D2D6DB 5%, transparent 6%);
+  background-size: 1em 1em;
+  background-color: #eff0f3;
+  opacity: 1
+}
+
+.banner {
+  background: radial-gradient(circle, #D2D6DB 10%, transparent 11%),radial-gradient(circle at bottom left, #D2D6DB 1%, transparent 6%),radial-gradient(circle at bottom right, #D2D6DB 5%, transparent 6%),radial-gradient(circle at top left, #D2D6DB 5%, transparent 6%),radial-gradient(circle at top right, #D2D6DB 5%, transparent 6%);
+  background-size: 1em 1em;
+  background-color: #eff0f3;
+  opacity: 1
 }
 
 

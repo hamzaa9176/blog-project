@@ -61,10 +61,10 @@ const Category = ({ fallback, slug }) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <section className="py-6 sm:py-12 dark:dark:bg-gray-800 dark:dark:text-gray-100">
-        <div className="container p-6 mx-auto space-y-8">
-          <div className="space-y-2 text-center">
-            <h2 className="text-3xl font-bold text-white">category: <span className="text-violet-400">{slug.toLowerCase()}</span></h2>
+      <section className="py-6 sm:py-12  dark:dark:text-gray-100">
+        <div className="container w:4/5 bg-accent p-6 mx-auto space-y-8">
+          <div className=" text-center">
+            <h2 className="text-xl font-bold mb-10 flex leading-3 text-typing">category: <span className="text-accent">{slug.toLowerCase()}</span></h2>
           </div>
           <div className="grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-2 lg:grid-cols-4">
             { data?.postsConnection?.edges.map((post) => (

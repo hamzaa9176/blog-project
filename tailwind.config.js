@@ -9,9 +9,16 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+
     extend: {
       fontFamily:{
         raleway:'Raleway',    
+      },
+      colors:{
+        'primary':'#eff0f3',
+        'secondary': '#fffffe',
+        'accent':'#6246ea',
+        'typing':'#2b2c34'
       }
     }
   },
