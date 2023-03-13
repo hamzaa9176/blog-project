@@ -133,7 +133,7 @@ export default function Home({ fallback }) {
           <h1 className='font-bold mb-10 flex leading-4'>Latest Posts <span className='ml-2'><AiOutlineMinus/></span></h1>
           <h2 className='font-semibold '><Link href={''} className='flex gap-2 text-accent hover:text-typing'>View All Posts <IoIosArrowForward/></Link></h2>
           </div>
-          <div className="grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-2 lg:grid-cols-4">
             {
               data?.postsConnection?.edges.map((post) => (
                 <BlogCard
