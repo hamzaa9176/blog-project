@@ -15,7 +15,7 @@ const BlogCard = ({ title, author, datePublished, slug, coverPhoto }) => {
 
           <div className='flex flex-row justify-left w-full mt-5'>
             
-              <img src={author.avatar.url} alt={author.name} className=" rounded-full w-10 h-10 object-cover" />
+              {/* <img src={author.avatar.url} alt={author.name} className=" rounded-full w-10 h-10 object-cover" /> */}
               <div className='flex flex-col ml-5'>
               <Link href={`/author/${author.name}`} className="text-md font-semibold lowercase hover:underline text-accent">{author.name}</Link>
             <span className='text-xs text-typing'>{moment(datePublished).format('MMMM Do YYYY')}</span>
