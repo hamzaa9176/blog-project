@@ -1,10 +1,58 @@
 import {BlogCard} from "../../components";
 import Head from "next/head";
 import {getCategories, GetCategoryPost} from '../../services'
+import useSWR from 'swr'
+import { request } from 'graphql-request';
+import { useState } from 'react';
+
+const graphqlAPI = process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT;
 
 
+const Category = ({ fallback, slug }) => {
+  const [next, setNext] = useState(0)
 
-const Category = ({ posts, slug }) => {
+  const { data } = useSWR([graphqlAPI,
+`query GetCategoryPost($slug: String!, $next: Int) {
+  postsConnection(where: { categories_some: { slug: $slug } },first:4, skip:$next, orderBy: createdAt_DESC) {
+    edges {
+      cursor
+      node {
+        author {
+          id
+          name
+          bio
+          avatar {
+            url
+          }
+        }
+        createdAt
+        slug
+        title
+        coverPhoto {
+          url
+        }
+        datePublished
+        content {
+          html
+        }
+
+        categories {
+          name
+          slug
+        }
+      }
+    }
+  pageInfo{
+    hasNextPage
+    hasPreviousPage
+    pageSize
+  }
+  }
+}`, next, slug], 
+([end, query])=>  request(end, query, {next, slug}),
+{fallbackData:fallback, revalidateOnFocus:true}
+  );
+
   return (
     <div className="container w-4/5 m-auto">
       <Head>
@@ -19,7 +67,9 @@ const Category = ({ posts, slug }) => {
             <h2 className="text-3xl font-bold text-white">category: <span className="text-violet-400">{slug.toLowerCase()}</span></h2>
           </div>
           <div className="grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-2 lg:grid-cols-4">
-            {posts.map((post) => (
+            { data?.postsConnection?.edges.map((post) => (
+
+                //console.log(post.node.title)
               <BlogCard
                 title={post.node.title}
                 author={post.node.author}
@@ -30,6 +80,9 @@ const Category = ({ posts, slug }) => {
               />
             ))}
           </div>
+          {(data?.postsConnection?.pageInfo.pageSize>1)&&(<><button disabled={!data?.postsConnection?.pageInfo.hasPreviousPage} onClick={() => setNext(next - 4)} className="text-white disabled:bg-red-400 disabled:text-gray-800 bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Prev</button>
+        <button disabled={!data?.postsConnection?.pageInfo.hasNextPage} onClick={() => setNext(next + 4)}  className="text-white disabled:bg-gray-400 disabled:text-gray-800 bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" >Next</button>
+        </>)}
         </div>
       </section>
     </div>
@@ -52,9 +105,10 @@ export async function getStaticProps({ params }) {
   const posts = data.postsConnection.edges;
   return {
     props: {
-      posts,
-      slug,
-    },
-    revalidate: 10,
+      fallback: {
+        posts: posts,
+       },
+       slug
+    }
   };
 }

@@ -21,7 +21,7 @@ export async function getCategories() {
 export async function GetCategoryPost(slug){
   const QUERY = gql`
   query GetCategoryPost($slug: String!) {
-    postsConnection(where: { categories_some: { slug: $slug } }, orderBy: createdAt_DESC) {
+    postsConnection(where: { categories_some: { slug: $slug } },first:4, skip:0, orderBy: createdAt_DESC) {
       edges {
         cursor
         node {
@@ -50,10 +50,15 @@ export async function GetCategoryPost(slug){
           }
         }
       }
+    pageInfo{
+      hasNextPage
+      hasPreviousPage
+      pageSize
+    }
     }
   }
 `;
-const result = await request(graphqlAPI,QUERY, {slug});
+const result = await fetcher(graphqlAPI,QUERY, {slug});
 return result;
 }
 
